@@ -1,0 +1,15 @@
+<%- include('./partials/header') %>
+
+<section id="show-page">
+    <div>Item name:</div>
+    <div><%= item.name %></div>
+    <div>Item available?</div>
+    <div> <%= item.available ? 'Available' : 'Unavailable' %></div>    
+    <div> Qunatity </div>
+    <div> <%= item.quantity %></div>
+    <!-- <div> <%= item.choreRelated %></div> -->
+    <!-- <div> <%= item.chores %></div> -->
+    
+</section>
+
+<%- include('./partials/footer') %>
