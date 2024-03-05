@@ -68,7 +68,7 @@ nav > a.active {
 
 #new-form *,
 #add-review-form *,
-#add-performer-form * {
+#add-chore-form * {
   font-size: 20px;
   padding: 5px;
   border-radius: 5px;
@@ -121,7 +121,7 @@ table td {
 }
 
 #add-review-form,
-#add-performer-form {
+#add-chore-form {
   display: grid;
   grid-template-columns: auto auto;
   grid-gap: 1rem;
@@ -129,7 +129,7 @@ table td {
 }
 
 #add-review-form input[type="submit"],
-#add-performer-form input[type="submit"]  {
+#add-chore-form input[type="submit"]  {
   width: 10rem;
   grid-column: 2 / 3;
 }
@@ -155,6 +155,16 @@ hr {
   border-radius: .3rem;
   font-size: .8rem;
   text-align: center;
+}
+
+#show-page ul {
+  margin: 0 0 2rem;
+  padding: 0;
+  list-style: none;
+}
+	
+#show-page li {
+  font-weight: bold;
 }
 
 #show-page ul {

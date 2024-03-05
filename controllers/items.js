@@ -1,4 +1,5 @@
 const Item = require('../models/item');
+const Chore = require('../models/chore')
 
 async function index(req, res) {
     const items = await Item.find({});
@@ -6,9 +7,10 @@ async function index(req, res) {
 }
 
 async function show(req, res) {
-    const item = await Item.findById(req.params.id);
-    console.log(item);
-    res.render('items/show', {title: 'Item details', item})
+    const item = await Item.findById(req.params.id).populate('chore');
+    const chore = await Chore.find({ _id: {$nin: item.chore} }).sort('name');
+    console.log(chore);
+    res.render('items/show', {title: 'Item details', item, chore})
 }
 
 async function newItem(req, res) {

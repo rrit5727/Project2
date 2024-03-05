@@ -11,7 +11,10 @@ const itemSchema = new Schema({
         default: 5
     },
     choreRelated: {type: Boolean, default: true},
-    chores: [String],
+    chores: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Chore'
+    }],    
 }, {
     timestamps: true
 });
