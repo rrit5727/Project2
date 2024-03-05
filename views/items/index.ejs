@@ -11,7 +11,7 @@
             <% items.forEach(function(item) {%>
                 <tr>
                     <td><%= item.name  %></td>
-                    <td><%= item.available  %></td>
+                    <td><%= item.available ? 'Available' : 'Unavailable' %></td>                    
                     <td><a href="/items/<%= item._id %>">ITEM DETAILS</a></td>
                 </tr>
             <% }); %>

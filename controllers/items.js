@@ -11,16 +11,30 @@ async function show(req, res) {
     res.render('items/show', {title: 'Item details', item})
 }
 
-async function newItem(res, req) {
-
+async function newItem(req, res) {
     res.render('items/new', {title: 'Add item', errorMsg: ''});
 }
 
+
+async function create(req, res) {
+    req.body.available = !!req.body.available;  
+    for (let key in req.body) {
+        if (req.body[key] === '') delete req.body[key];
+    }
+    try {
+        const item = await Item.create(req.body);
+        res.redirect(`/items/${item._id}?title=Item`);
+    } catch(err) {
+        console.log(err);
+        res.render('items/new', {errorMsg: err.message});
+    }
+}
 
 
 module.exports = {
     index,
     show,
-    new: newItem
+    new: newItem,
+    create
 }
 
