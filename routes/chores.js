@@ -7,7 +7,7 @@ const choresCtrl = require('../controllers/chores')
 router.get('/chores/new', choresCtrl.new);
 router.post('/chores', choresCtrl.create);
 router.get('/chores', choresCtrl.index);
-router.get('chores/:id', choresCtrl.show)
+router.get('/chores/:id', choresCtrl.show)
 
 
 router.post('/items/:id/chores', choresCtrl.addToItem);

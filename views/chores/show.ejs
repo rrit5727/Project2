@@ -3,6 +3,12 @@
 <section id="show-page">
     <div>Chore: </div>
     <div><%= chore.name %></div>
+    <div>Items used</div>
+    <ul>
+        <% chore.itemsUsed.forEach(function(item) { %>
+            <li> <%= item.name %></li>
+            <% }); %>
+    </ul>
 </section>
 
 

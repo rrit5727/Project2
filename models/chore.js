@@ -7,6 +7,10 @@ const choreSchema = new Schema({
         required: true,
         unique: true
 }, 
+itemsUsed: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Item'
+}]
 }, {
     timestamps: true
 });
