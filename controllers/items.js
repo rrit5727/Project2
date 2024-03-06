@@ -47,9 +47,14 @@ async function makeShoppingList(req, res) {
 
 async function deleteItem(req, res){
     await Item.findOneAndDelete({_id: req.params.id});
-        res.redirect('/items') 
-    
+        res.redirect('/items')     
 }
+
+async function edit(req, res) {
+    const item = await Item.findOne({_id: req.params.id}); 
+        res.render('items/edit', {title: 'Update item', item});        
+    };
+
 
 module.exports = {
     index,
@@ -58,6 +63,7 @@ module.exports = {
     create,
     addToChore,
     makeShoppingList,
-    delete: deleteItem
+    delete: deleteItem,
+    edit
 }
 
