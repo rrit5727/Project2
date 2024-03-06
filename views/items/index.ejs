@@ -6,7 +6,7 @@
                 <th>Item name</th>
                 <th>Available?</th>
                 <th>Item details</th>
-                <th></th>                     
+                <th>Delete item</th>                     
             </tr>
         </thead>
         <tbody>
@@ -14,7 +14,11 @@
                 <tr>
                     <td><%= item.name  %></td>
                     <td><%= item.available ? 'Available' : 'Unavailable' %></td>                    
-                    <td><a href="/items/<%= item._id %>">ITEM DETAILS</a></td>
+                    <td><a href="/items/<%= item._id %>">Details</a></td>
+                    <Td><form action="/items/<%= item._id %>?_method=DELETE"
+                        class="delete-form" method="POST">
+                        <button type="submit">X</button>
+                    </Td>
                 </tr>
             <% }); %>
         </tbody>

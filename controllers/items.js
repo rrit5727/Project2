@@ -45,12 +45,19 @@ async function makeShoppingList(req, res) {
     res.render('items/shoppingList', {title: 'Shopping-list', list})
 }
 
+async function deleteItem(req, res){
+    await Item.findOneAndDelete({_id: req.params.id});
+        res.redirect('/items') 
+    
+}
+
 module.exports = {
     index,
     show,
     new: newItem,
     create,
     addToChore,
-    makeShoppingList
+    makeShoppingList,
+    delete: deleteItem
 }
 
