@@ -4,12 +4,34 @@
     <div>Chore: </div>
     <div><%= chore.name %></div>
     <div>Items used</div>
-    <ul>
-        <% itemsUsed.forEach(function(item) { %>
-            <li> <%= item.name %></li>
-            <% }); %>
-    </ul>
+   
 </section>
+
+<table>
+    <thead>
+        <tr>
+            <th>Item used</th>
+            <th>Available</th>
+            <th>Quantity</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% itemsUsed.forEach(function(item) { %>
+            <tr>
+                <td><%= item.name %></td>
+                <td><%= item.available ? 'Available' : 'Unavailable' %></td>
+                <td><%= item.quantity %></td>
+                <td><a href="/items/<%= item._id %>/edit %>">Update Item</a></td>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>
+            
+  
+
+
+
 
 <section>
     <form id="add-item-to-chore" action="/chores/<%= chore._id %>/items" method="POST">

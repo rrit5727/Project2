@@ -3,7 +3,9 @@ const Chore = require('../models/chore')
 
 async function index(req, res) {
     const items = await Item.find({});
-    res.render('items/index',  {title: 'All Items', items })
+    const item = await Item.findById(req.params.id).populate('chore');
+    const chore = await Chore.find({ _id: {$nin: item.chore} }).sort('name');
+    res.render('items/index',  {title: 'All Items', items, chore, item })
 }
 
 async function show(req, res) {
@@ -41,7 +43,7 @@ async function addToChore(req, res) {
 } 
 
 async function makeShoppingList(req, res) {
-    const list = await Item.find({quantity: {$lt: 1}});
+    const list = await Item.find({quantity: {$lt: 2}});
     res.render('items/shoppingList', {title: 'Shopping-list', list})
 }
 
