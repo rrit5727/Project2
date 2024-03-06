@@ -55,18 +55,18 @@ async function edit(req, res) {
         res.render('items/edit', {title: 'Update item', item});        
     };
 
-async function update(req, res) {
-    Item.findOneAndUpdate({_id: req.params.id},
-        // update object with updated properties
-        req.body,
-        // options object with new: true to make sure updated doc is returned
-        {new: true},
-        function(err, item) {
-          if (err || !item) return res.redirect('/items');
-          res.redirect(`/items/${item._id}`);
+    async function update(req, res) {
+        const { name, quantity } = req.body;
+        let available = true;
+
+        if (quantity < 1) {
+            available = false;
         }
-      );    
-}
+             
+        await Item.findByIdAndUpdate(req.params.id, { name, quantity, available });       
+        res.redirect(`/items/${req.params.id}`);
+    }
+
 
 
 module.exports = {
