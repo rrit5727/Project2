@@ -55,6 +55,19 @@ async function edit(req, res) {
         res.render('items/edit', {title: 'Update item', item});        
     };
 
+async function update(req, res) {
+    Item.findOneAndUpdate({_id: req.params.id},
+        // update object with updated properties
+        req.body,
+        // options object with new: true to make sure updated doc is returned
+        {new: true},
+        function(err, item) {
+          if (err || !item) return res.redirect('/items');
+          res.redirect(`/items/${item._id}`);
+        }
+      );    
+}
+
 
 module.exports = {
     index,
@@ -64,6 +77,7 @@ module.exports = {
     addToChore,
     makeShoppingList,
     delete: deleteItem,
-    edit
+    edit,
+    update
 }
 

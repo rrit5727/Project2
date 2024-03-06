@@ -12,6 +12,7 @@ router.get('/:id', itemsCtrl.show);
 router.delete('/:id', itemsCtrl.delete)
 router.post('/', itemsCtrl.create);
 router.get('/:id/edit', itemsCtrl.edit);
+router.put('/:id', itemsCtrl.update)
 
 
 // router.post('/chores/:id/items', itemsCtrl.addToChore);
