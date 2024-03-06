@@ -1,0 +1,25 @@
+<%- include('../partials/header') %>
+
+<table>
+    <thead>
+        <tr>
+            <th>Item name</th>
+            <th>Available?</th>
+            <th>Quantity</th>
+            <th></th>                     
+        </tr>
+    </thead>
+    <tbody>
+        <% list.forEach(function(item) {%>
+            <tr>
+                <td><%= item.name  %></td>
+                <td><%= item.available ? 'Available' : 'Unavailable' %></td>                    
+                <td><%= item.quantity %></td>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>
+
+
+
+<%- include('../partials/footer') %>

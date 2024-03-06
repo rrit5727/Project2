@@ -5,11 +5,23 @@
     <div><%= chore.name %></div>
     <div>Items used</div>
     <ul>
-        <% chore.itemsUsed.forEach(function(item) { %>
+        <% itemsUsed.forEach(function(item) { %>
             <li> <%= item.name %></li>
             <% }); %>
     </ul>
 </section>
+
+<section>
+    <form id="add-item-to-chore" action="/chores/<%= chore._id %>/items" method="POST">
+        <select name="itemId">
+            <% items.forEach(function(item){ %>
+                <option value="<%= item._id %>"> <%= item.name %> </option>
+            <% }); %>
+        </select>
+        <button>Add to chore</button>
+    </form>
+</section>
+
 
 
 <%- include('../partials/footer') %>

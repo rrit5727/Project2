@@ -21,7 +21,7 @@
 </section>
         
 <section>
-    <form id="add-chore-to-chore" action="/items/<%= item._id %>/chores" method="POST">
+    <form id="add-chore-to-item" action="/items/<%= item._id %>/chores" method="POST">
         <select name="choreId" >
             <% chore.forEach(function(chore){ %>
                 <option value="<%= chore._id %>"><%= chore.name %></option>

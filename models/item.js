@@ -6,7 +6,7 @@ const itemSchema = new Schema({
     available: {type: Boolean, default: true},
     quantity: {
         type: Number,
-        min: 1,
+        min: 0,
         max: 5,
         default: 5
     },

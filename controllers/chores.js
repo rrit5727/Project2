@@ -40,5 +40,8 @@ async function index(req, res) {
 
 async function show(req, res) {
   const chore = await Chore.findById(req.params.id).populate('itemsUsed');
-  res.render('chores/show', {title: chore.name, chore})
+  const items = await Item.find({ _id: {$nin: chore.itemsUsed} }).sort('name');
+  const itemsUsed = await Item.find({chore: req.params.id})
+  console.log(items)
+  res.render('chores/show', {title: chore.name, chore, items, itemsUsed})
 }

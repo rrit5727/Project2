@@ -7,12 +7,10 @@ const choreSchema = new Schema({
         required: true,
         unique: true
 }, 
-itemsUsed: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Item'
-}]
+
 }, {
-    timestamps: true
+    timestamps: true,
+    strictPopulate: false
 });
 
 module.exports = mongoose.model('Chore', choreSchema);

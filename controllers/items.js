@@ -32,11 +32,25 @@ async function create(req, res) {
     }
 }
 
+async function addToChore(req, res) {
+    const chore = await Chore.findById(req.params.id);
+    const item = await Item.findById(req.body.itemId);
+    item.chore.push(req.params.id);
+    await item.save();
+    res.redirect(`/chores/${chore._id}`)
+} 
+
+async function makeShoppingList(req, res) {
+    const list = await Item.find({quantity: {$lt: 1}});
+    res.render('items/shoppingList', {title: 'Shopping-list', list})
+}
 
 module.exports = {
     index,
     show,
     new: newItem,
-    create
+    create,
+    addToChore,
+    makeShoppingList
 }
 
