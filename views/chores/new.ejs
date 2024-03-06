@@ -2,7 +2,7 @@
 
 <div>Before adding, please ensure that the Chore is not in the following list:</div>
 <section id="badge-container">
-  <% chores.forEach(function(chore) { %>
+  <% chore.forEach(function(chore) { %>
     <article class="badge"><%= chore.name %></article>
   <% }) %>
 </section>
@@ -10,8 +10,6 @@
 <form id="add-chore-form" action="/chores" method="POST">
   <label>Name:</label>
   <input type="text" name="name">
-  <label>Items:</label>
-  <input type="text" name="items">
   <input type="submit" value="Add Chore">
 </form>
 

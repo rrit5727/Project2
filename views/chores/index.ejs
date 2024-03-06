@@ -1,0 +1,19 @@
+3'<%- include('../partials/header') %>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Chore name</th>                                   
+            </tr>
+        </thead>
+        <tbody>
+            <% chores.forEach(function(chore) {%>
+                <tr>
+                    <td><%= chore.name  %></td>                                      
+                    <td><a href="/chores/<%= chore._id %>">CHORE DETAILS</a></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+<%- include('../partials/footer') %>

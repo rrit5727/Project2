@@ -4,13 +4,15 @@ const Item = require('../models/item');
 module.exports = {
     new: newChore,
     create,
-    addToItem
+    addToItem,
+    index,
+    show
 }
 
 async function newChore(req, res) {
     
-    const chores = await Chore.find({}).sort('name');
-    res.render('chores/new', { title: 'Add Chore', chores });
+    const chore = await Chore.find({}).sort('name');
+    res.render('chores/new', { title: 'Add Chore', chore });
   }
   
   async function create(req, res) {
@@ -30,3 +32,13 @@ async function addToItem(req, res) {
     await item.save();
     res.redirect(`/items/${item._id}`)
 } 
+
+async function index(req, res) {
+  const chores = await Chore.find({});
+  res.render('chores/index', {title: 'All Chores', chores})
+}
+
+async function show(req, res) {
+  const chore = await Chore.findById(req.params.id);
+  res.render('chores/show', {chore})
+}

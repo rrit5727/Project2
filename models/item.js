@@ -11,7 +11,7 @@ const itemSchema = new Schema({
         default: 5
     },
     choreRelated: {type: Boolean, default: true},
-    chores: [{
+    chore: [{
         type: Schema.Types.ObjectId,
         ref: 'Chore'
     }],    

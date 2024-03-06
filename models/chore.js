@@ -6,11 +6,7 @@ const choreSchema = new Schema({
         type: String,
         required: true,
         unique: true
-    },
-    Items: {
-        type: String,
-        required: true
-    }
+}, 
 }, {
     timestamps: true
 });
