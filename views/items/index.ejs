@@ -12,7 +12,7 @@
         <tbody>
             <% items.forEach(function(item) {%>
                 <tr>
-                    <td><%= item.name  %></td>
+                    <td><a href="/items/<%= item._id %>"><%= item.name  %></a></td>
                     <td><%= item.available ? 'Yes' : 'No'  %></td>
                     <td><%= item.quantity %></td>
                     <td><form id="add-chore-to-item" action="/items/<%= item._id %>/chores" method="POST">                        
@@ -26,9 +26,8 @@
                             <% }); %>
                         </select>
                         <button>Add to item</button>
-                    </form></td>
+                    </form></td>                 
                     
-                    <td><a href="/items/<%= item._id %>">ITEM DETAILS</a></td>
                     <Td><form action="/items/<%= item._id %>?_method=DELETE"
                         class="delete-form" method="POST">
                         <button type="submit">X</button>
