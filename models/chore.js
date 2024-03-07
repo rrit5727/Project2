@@ -6,8 +6,11 @@ const choreSchema = new Schema({
         type: String,
         required: true,
         unique: true
-}, 
-
+}, user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+}
 }, {
     timestamps: true,
     strictPopulate: false
