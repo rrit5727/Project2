@@ -1,26 +1,36 @@
 <%- include('../partials/header') %>
 
-<section id="show-page">
-    
+<section id="show-page">   
    
 </section>
-
 <table>
     <thead>
-        <tr>
-            
+        <tr>            
             <th>Item</th>
             <th>Available</th>
-            <th>Quantity</th>
-            
+            <th>Quantity</th>            
         </tr>
     </thead>
     <tbody>
         <% itemsUsed.forEach(function(item) { %>
             <tr>
                 <td><a href="/items/<%= item._id %>/edit %>"><%= item.name %></a></td>                
-                <td><%= item.available ? 'Available' : 'Unavailable' %></td>
-                <td><%= item.quantity %></td>                
+                <td><%= item.available ? 'Yes' : 'No' %></td>
+                <td>
+                    <% if (item.quantity === 0) { %>
+                        Nothing left
+                    <% } else if (item.quantity === 1) { %>
+                        20% left
+                    <% } else if (item.quantity === 2) { %>
+                        40% left
+                    <% } else if (item.quantity === 3) { %>
+                        60% left
+                    <% } else if (item.quantity === 4) { %>
+                        80% left
+                    <% } else if (item.quantity === 5) { %>
+                        fully stocked
+                    <% } %>
+                </td>                
             </tr>
         <% }); %>
     </tbody>
