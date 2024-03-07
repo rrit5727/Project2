@@ -6,7 +6,7 @@
                 <th>Item name</th>
                 <th>Available?</th>
                 <th>Quantity</th>
-                <th>Add to chore</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -18,19 +18,20 @@
                     <td><form id="add-chore-to-item" action="/items/<%= item._id %>/chores" method="POST">                        
                     
                     <select name="choreId" >
-                        <% const choreIds = item.chore.map(c=>c._id) %>
+                        <% const choreIds = item.chore.map(c=>c._id.toString()) %>
                         <% chores.forEach(function(chore){ %>
-                            <% if (!choreIds.includes(chore._id)) { %>
+                            <% if (!choreIds.includes(chore._id.toString())) { %>
                             <option value="<%= chore._id %>"><%= chore.name %></option>
                             <% } %>
                             <% }); %>
                         </select>
-                        <button>Add to item</button>
+                        <button>Add to chore</button>
                     </form></td>                 
                     
                     <Td><form action="/items/<%= item._id %>?_method=DELETE"
                         class="delete-form" method="POST">
                         <button type="submit">X</button>
+                        </form>
                 </tr>
             <% }); %>
         </tbody>

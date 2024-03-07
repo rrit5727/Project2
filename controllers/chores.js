@@ -17,6 +17,9 @@ async function newChore(req, res) {
   }
   
   async function create(req, res) {
+    req.body.user = req.user._id;
+    req.body.userName = req.user.name;
+    req.body.userAvatar = req.user.avatar;
     
     try {
       await Chore.create(req.body);
@@ -30,6 +33,7 @@ async function newChore(req, res) {
 async function addToItem(req, res) {
     const item = await Item.findById(req.params.id);
     item.chore.push(req.body.choreId);
+    console.log(item)
     await item.save();
     res.redirect('/items')
 } 
