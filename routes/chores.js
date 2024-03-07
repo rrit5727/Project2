@@ -9,7 +9,7 @@ router.get('/chores/new', choresCtrl.new);
 router.post('/chores', choresCtrl.create);
 router.get('/chores', choresCtrl.index);
 router.get('/chores/:id', choresCtrl.show)
-
+router.delete('/chores/:id', choresCtrl.delete)
 
 router.post('/items/:id/chores', choresCtrl.addToItem);
 router.post('/chores/:id/items', itemsCtrl.addToChore);

@@ -6,7 +6,8 @@ module.exports = {
     create,
     addToItem,
     index,
-    show
+    show,
+    delete: deleteChore
 }
 
 async function newChore(req, res) {
@@ -44,4 +45,9 @@ async function show(req, res) {
   const itemsUsed = await Item.find({chore: req.params.id})
   console.log(items)
   res.render('chores/show', {title: chore.name, chore, items, itemsUsed})
+}
+
+async function deleteChore(req, res){
+  await Chore.findOneAndDelete({_id: req.params.id});
+      res.redirect('/chores')     
 }
