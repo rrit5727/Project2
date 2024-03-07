@@ -13,16 +13,15 @@
             <th>Item used</th>
             <th>Available</th>
             <th>Quantity</th>
-            <th>Quantity</th>
+            
         </tr>
     </thead>
     <tbody>
         <% itemsUsed.forEach(function(item) { %>
             <tr>
-                <td><%= item.name %></td>
+                <td><a href="/items/<%= item._id %>/edit %>"><%= item.name %></a></td>                
                 <td><%= item.available ? 'Available' : 'Unavailable' %></td>
-                <td><%= item.quantity %></td>
-                <td><a href="/items/<%= item._id %>/edit %>">Update Item</a></td>
+                <td><%= item.quantity %></td>                
             </tr>
         <% }); %>
     </tbody>

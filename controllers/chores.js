@@ -30,7 +30,7 @@ async function addToItem(req, res) {
     const item = await Item.findById(req.params.id);
     item.chore.push(req.body.choreId);
     await item.save();
-    res.redirect(`/items/${item._id}`)
+    res.redirect('/items')
 } 
 
 async function index(req, res) {

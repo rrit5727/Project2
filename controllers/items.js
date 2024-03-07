@@ -1,17 +1,33 @@
 const Item = require('../models/item');
-const Chore = require('../models/chore')
+const Chore = require('../models/chore');
+const item = require('../models/item');
 
 async function index(req, res) {
-    const items = await Item.find({});
+    const items = await Item.find({}).populate('chore');
+    // console.log(items)
+
+    const chores = await Chore.find({});
+    const itemChore = items.map(item=>{
+        return item.chore
+    })
+    const itemChoreElement = itemChore.map(chore=> {
+        //   return chore.map(c =>{
+            return chore
+        //   })
+
+    })
+    console.log(itemChoreElement)
+    // console.log('item' + itemChore)
     // const item = await Item.findById(req.params.id).populate('chore');
+    // console.log(item)
     // const chore = await Chore.find({ _id: {$nin: item.chore} }).sort('name');
-    res.render('items/index',  {title: 'All Items', items })
+    res.render('items/index',  {title: 'All Items', items, itemChoreElement, chores })
 }
 
 async function show(req, res) {
     const item = await Item.findById(req.params.id).populate('chore');
     const chore = await Chore.find({ _id: {$nin: item.chore} }).sort('name');
-    console.log(chore);
+    
     res.render('items/show', {title: 'Item details', item, chore})
 }
 

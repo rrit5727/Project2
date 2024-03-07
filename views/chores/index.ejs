@@ -9,8 +9,8 @@
         <tbody>
             <% chores.forEach(function(chore) {%>
                 <tr>
-                    <td><%= chore.name  %></td>                                      
-                    <td><a href="/chores/<%= chore._id %>">CHORE DETAILS</a></td>
+                                                          
+                    <td><a href="/chores/<%= chore._id %>"><%= chore.name  %></a></td>
                 </tr>
             <% }); %>
         </tbody>
