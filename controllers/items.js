@@ -2,6 +2,8 @@ const Item = require('../models/item');
 const Chore = require('../models/chore');
 const item = require('../models/item');
 
+
+//Standard CRUD funcationalities for items ⌄⌄⌄
 async function index(req, res) {
     const items = await Item.find({}).populate('chore');
     // console.log(items)
@@ -50,6 +52,34 @@ async function create(req, res) {
     }
 }
 
+
+
+async function deleteItem(req, res){
+    await Item.findOneAndDelete({_id: req.params.id});
+    res.redirect('/items')     
+}
+
+async function edit(req, res) {
+    const item = await Item.findOne({_id: req.params.id}); 
+    res.render('items/edit', {title: 'Update item', item});        
+};
+
+
+async function update(req, res) {
+    const { name, quantity } = req.body;
+    let available = true;
+    
+    if (quantity < 1) {
+        available = false;
+    }
+    
+    await Item.findByIdAndUpdate(req.params.id, { name, quantity, available });       
+    res.redirect(`/items/${req.params.id}`);
+}
+
+// End Standard CRUD funcationalities for items ^^^
+
+// This allows you to add an item to a chore
 async function addToChore(req, res) {
     const chore = await Chore.findById(req.params.id);
     const item = await Item.findById(req.body.itemId);
@@ -58,32 +88,13 @@ async function addToChore(req, res) {
     res.redirect(`/chores/${chore._id}`)
 } 
 
+//This generates a shopping list by retrieving all items wit a quantity of 1 or less (~20%)
 async function makeShoppingList(req, res) {
     const list = await Item.find({quantity: {$lt: 2}});
     res.render('items/shoppingList', {title: 'Shopping-list', list})
 }
 
-async function deleteItem(req, res){
-    await Item.findOneAndDelete({_id: req.params.id});
-        res.redirect('/items')     
-}
 
-async function edit(req, res) {
-    const item = await Item.findOne({_id: req.params.id}); 
-        res.render('items/edit', {title: 'Update item', item});        
-    };
-
-    async function update(req, res) {
-        const { name, quantity } = req.body;
-        let available = true;
-
-        if (quantity < 1) {
-            available = false;
-        }
-             
-        await Item.findByIdAndUpdate(req.params.id, { name, quantity, available });       
-        res.redirect(`/items/${req.params.id}`);
-    }
 
 
 
