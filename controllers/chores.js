@@ -7,7 +7,8 @@ module.exports = {
     addToItem,
     index,
     show,
-    delete: deleteChore
+    delete: deleteChore,
+    listImpactedChores
 }
 
 async function newChore(req, res) {
@@ -54,4 +55,23 @@ async function show(req, res) {
 async function deleteChore(req, res){
   await Chore.findOneAndDelete({_id: req.params.id});
       res.redirect('/chores')     
+}
+
+async function listImpactedChores(req, res){
+  try {
+    const itemsWithZeroQuantity = await Item.find({ quantity: 0});
+    console.log('itemsWithZeroQuantity'+ itemsWithZeroQuantity)
+    const itemIdsWithZeroQuantity = itemsWithZeroQuantity.map(item => item._id);
+
+    const chores = await Chore.find({ 'item': { $in: itemIdsWithZeroQuantity }});
+    console.log('chores' + chores)
+
+    res.render('chores/list', {title: 'Impacted chores list', chores})
+    } 
+    
+    
+    catch (error) {
+      console.error("Error:", error);
+        throw error;
+    }
 }
