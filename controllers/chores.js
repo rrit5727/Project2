@@ -57,46 +57,31 @@ async function deleteChore(req, res){
       res.redirect('/chores')     
 }
 
-// async function listImpactedChores(req, res){
-//   try {
-//     const itemsWithZeroQuantity = await Item.find({ quantity: 0});
-//     console.log('Items with zero quantity:', itemsWithZeroQuantity)
-//     const itemIdsWithZeroQuantity = itemsWithZeroQuantity.map(item => item._id);
-//     console.log('Item IDs with zero quantity:', itemIdsWithZeroQuantity);
-//     // const chores = await Chore.find({ 'chore': { $in: itemIdsWithZeroQuantity }});
-//     // console.log('chores', chores)
+async function listImpactedChores(req, res) {
+  try {
+      // Step 1: Find the items with a quantity of 0
+      const itemsWithZeroQuantity = await Item.find({ quantity: 0 });
 
-//     const impactedChores = await Chore.find({ _id: { $in: itemIdsWithZeroQuantity } });
-//     console.log('Impacted chores:', impactedChores);
-//     console.log(Chore);
-//     console.log(Chore.forEach_id)
-    
-    
-//     res.render('chores/list', {title: 'Impacted chores list', impactedChores})
-//     } 
+      // Step 2: Retrieve the unique chores associated with the items
+      const uniqueChores = new Set(); // Use a set to ensure uniqueness
+      for (const item of itemsWithZeroQuantity) {
+          const choresForDepletedItem = await Chore.find({ _id: { $in: item.chore } });
+          console.log('item.chore', item.chore)
+          choresForDepletedItem.forEach(chore => uniqueChores.add(chore._id.toString())); // Add chore IDs to the set
+      }
 
-    async function listImpactedChores(req, res) {
-       
-        // Step 1: Find the "egg" item with a quantity of 0
-        const itemsWithZeroQuantity = await Item.find({ quantity: 0 });
-        console.log('itemsWithZeroQuantity', itemsWithZeroQuantity)
+      // Convert chore IDs back to objects
+      const impactedChores = await Chore.find({ _id: { $in: Array.from(uniqueChores) } });
 
-        // Step 2: Retrieve the chores associated with the "egg" item
-        let impactedChores = [];
-        for (let item of itemsWithZeroQuantity) {
-            const choresForItem = await Chore.find({ _id: { $in: item.chore } });
-            console.log('Chores for', item.name, ':', choresForItem);
-            impactedChores = impactedChores.concat(choresForItem);
-        }
-        
-        console.log('impactedChores', impactedChores);
-        
-        res.render('chores/list', { title: 'impactedChores', impactedChores });
-      } 
-      // catch (error) {
-      //   console.error("Error:", error);
-      //   throw error;
-      // }
+      console.log('impactedChores', impactedChores);
+      
+      res.render('chores/list', { title: 'Impacted Chores', impactedChores });
+  } catch (error) {
+      console.error('Error:', error);
+      throw error;
+  }
+} 
+     
     
     
     

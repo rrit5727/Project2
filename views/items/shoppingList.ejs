@@ -14,7 +14,12 @@
             <tr>
                 <td><%= item.name  %></td>
                 <td><%= item.available ? 'Available' : 'Unavailable' %></td>                    
-                <td><%= item.quantity %></td>
+                <td>
+                    <% if (item.quantity === 0) { %>
+                        Nothing left
+                        
+                    <% } %>
+                </td>
             </tr>
         <% }); %>
     </tbody>

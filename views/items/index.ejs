@@ -14,7 +14,21 @@
                 <tr>
                     <td><a href="/items/<%= item._id %>"><%= item.name  %></a></td>
                     <td><%= item.available ? 'Yes' : 'No'  %></td>
-                    <td><%= item.quantity %></td>
+                    <td>
+                        <% if (item.quantity === 0) { %>
+                            Nothing left
+                        <% } else if (item.quantity === 1) { %>
+                            20% left
+                        <% } else if (item.quantity === 2) { %>
+                            40% left
+                        <% } else if (item.quantity === 3) { %>
+                            60% left
+                        <% } else if (item.quantity === 4) { %>
+                            80% left
+                        <% } else if (item.quantity === 5) { %>
+                            fully stocked
+                        <% } %>                        
+                    </td>
                     <td><form id="add-chore-to-item" action="/items/<%= item._id %>/chores" method="POST">                        
                     
                     <select name="choreId" >
