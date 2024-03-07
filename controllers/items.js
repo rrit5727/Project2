@@ -3,9 +3,9 @@ const Chore = require('../models/chore')
 
 async function index(req, res) {
     const items = await Item.find({});
-    const item = await Item.findById(req.params.id).populate('chore');
-    const chore = await Chore.find({ _id: {$nin: item.chore} }).sort('name');
-    res.render('items/index',  {title: 'All Items', items, chore, item })
+    // const item = await Item.findById(req.params.id).populate('chore');
+    // const chore = await Chore.find({ _id: {$nin: item.chore} }).sort('name');
+    res.render('items/index',  {title: 'All Items', items })
 }
 
 async function show(req, res) {

@@ -6,28 +6,19 @@
                 <th>Item name</th>
                 <th>Available?</th>
                 <th>Quantity</th>
-                <th>Add to chore</th>
-                <th>Delete item</th>                     
+                
             </tr>
         </thead>
         <tbody>
             <% items.forEach(function(item) {%>
                 <tr>
                     <td><%= item.name  %></td>
-                    <td><%= item.available ? 'Available' : 'Unavailable' %></td>
+                    <td><%= item.available  %></td>
                     <td><%= item.quantity %></td>
-                    <td><form id="add-chore-to-item" action="/items/<%= item._id %>/chores" method="POST">
-                        <select name="choreId" >
-                            <% chore.forEach(function(chore){ %>
-                                <option value="<%= chore._id %>"><%= chore.name %></option>
-                            <% }); %>
-                        </select>
-                        <button>Add to item</button>
-                    </form></td>
+                    <td><a href="/items/<%= item._id %>">ITEM DETAILS</a></td>
                     <Td><form action="/items/<%= item._id %>?_method=DELETE"
                         class="delete-form" method="POST">
                         <button type="submit">X</button>
-                    </Td>
                 </tr>
             <% }); %>
         </tbody>
