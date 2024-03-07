@@ -79,6 +79,8 @@ async function update(req, res) {
 
 // End Standard CRUD funcationalities for items ^^^
 
+// Special purpose item functions ⌄⌄⌄
+
 // This allows you to add an item to a chore
 async function addToChore(req, res) {
     const chore = await Chore.findById(req.params.id);
@@ -88,7 +90,8 @@ async function addToChore(req, res) {
     res.redirect(`/chores/${chore._id}`)
 } 
 
-//This generates a shopping list by retrieving all items wit a quantity of 1 or less (~20%)
+//This generates a shopping list by retrieving all items with a quantity of 1 or less (~20%)
+// and redirects to a separate shopping list view
 async function makeShoppingList(req, res) {
     const list = await Item.find({quantity: {$lt: 2}});
     res.render('items/shoppingList', {title: 'Shopping-list', list})
