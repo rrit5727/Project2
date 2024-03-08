@@ -35,6 +35,8 @@
 * Item can be linked to a chore using the drop down menu - select 'add to chore' once chore selected
 * Select an item by clicking on the item name to update
 - Item details can then be manipulated 
+* Select a chore by clicking on the chore name
+- This will show a list of the items used in that chore and the quantity of each item
 
 ## Special purpose functionality
 ### Shopping list
